@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cross fit  Class | Fitzon Gym</title>
+    <style>
+        body {
+            background-color: #00264A;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: rgb(197, 163, 14);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .registration-container {
+            background-color: #001133;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #f8f8f8;
+        }
+        button {
+            background-color: #00021E;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 30px auto 0;
+        }
+        button:hover {
+            background-color:#f59e0b;
+            color: #00021E;
+        }
+        .confirmation {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: #001a3d;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .back-btn {
+            display: inline-block;
+            background: #00021E;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .class-info {
+            background-color: #001133;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <a href="crossfit-class.html" class="back-btn">← Back to Class Details</a> -->
+    
+    <div class="registration-container">
+        <h1>CrossFit Training</h1>
+        
+        <form id="registrationForm" method="POST" action="cross.php">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="membership">Membership Type</label>
+                <select id="membership" name="membership" required>
+                    <option value="">Select an option</option>
+                    <option value="single">Single Class ($15)</option>
+                    <option value="monthly">Monthly Unlimited ($120)</option>
+                    <option value="member">Gym Member (10% discount)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="schedule">Preferred Class Time</label>
+                <select id="schedule" name="schedule" required>
+                    <option value="">Select a time</option>
+                    <option value="monday">Monday 7:00 AM (Hatha Yoga)</option>
+                    <option value="wednesday">Wednesday 6:00 PM (Vinyasa Flow)</option>
+                    <option value="friday">Friday 7:00 AM (Restorative Yoga)</option>
+                    <option value="saturday">Saturday 9:00 AM (Yoga + Meditation)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="experience">Yoga Experience Level</label>
+                <select id="experience" name="experience">
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+            </div>
+            
+            <button type="submit">Complete Registration</button>
+        </form>
+    </div>
+</body>
+</html>

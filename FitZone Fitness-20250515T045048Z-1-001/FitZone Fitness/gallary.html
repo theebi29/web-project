@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Gallery</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+            color: #ffffff;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .gallery-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ffffff;
+            font-size: 2.5rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            aspect-ratio: 4/3;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+            padding: 20px;
+        }
+
+        .gallery-item-title {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #ffffff;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+            color: #ff6b6b;
+        }
+
+        .modal-media {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .modal-media img, .modal-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-details {
+            padding: 30px;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .modal-description {
+            color: #cbd5e1;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-features {
+            margin-bottom: 25px;
+        }
+
+        .modal-features h3 {
+            margin-bottom: 10px;
+            color: #ffffff;
+            font-size: 1.3rem;
+        }
+
+        .modal-features ul {
+            list-style-type: none;
+        }
+
+        .modal-features li {
+            padding: 8px 0;
+            color: #cbd5e1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-features li:before {
+            content: "•";
+            color: #ff6b6b;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            font-size: 1.2em;
+        }
+
+        .modal-signup-btn {
+            display: inline-block;
+            background-color: #ff6b6b;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+        }
+
+        .modal-signup-btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Button Styles */
+        button {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 10em;
+            font-size: 17px;
+            font-weight: 600;
+            padding: 1em 2em;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        button:hover {
+            transform: translateY(-4px) translateX(-2px);
+            box-shadow: 2px 5px 0 0 rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        button:active {
+            transform: translateY(2px) translateX(1px);
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .modal-media {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-details {
+                padding: 20px;
+            }
+            
+            .gallery-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="gallery-section">
+        <h2 class="gallery-title">Our Gym blogs </h2>
+        
+        <div class="gallery-grid">
+            <!-- Gym Item 1 -->
+            <div class="gallery-item" data-id="1">
+                <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Weight Training Area">
+                <div class="gallery-item-overlay">
+                    <h3 class="gallery-item-title">Weight Training</h3>
+                </div>
+            </div>
+            
+            <!-- Gym Item 2 -->
+            <div class="gallery-item" data-id="2">
+                <img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cardio Zone">
+                <div class="gallery-item-overlay">
+                    <h3 class="gallery-item-title">Cardio Zone</h3>
+                </div>
+            </div>
+            
+            <!-- Gym Item 3 -->
+            <div class="gallery-item" data-id="3">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="CrossFit Area">
+                <div class="gallery-item-overlay">
+                    <h3 class="gallery-item-title">CrossFit Area</h3>
+                </div>
+            </div>
+            
+            <!-- Gym Item 4 -->
+            <div class="gallery-item" data-id="4">
+                <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Yoga Studio">
+                <div class="gallery-item-overlay">
+                    <h3 class="gallery-item-title">Yoga Studio</h3>
+                </div>
+            </div>
+            
+            <!-- Gym Item 5 -->
+            <div class="gallery-item" data-id="5">
+                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Boxing Ring">
+                <div class="gallery-item-overlay">
+                    <h3 class="gallery-item-title">Boxing Ring</h3>
+                </div>
+            </div>
+            
+            <!-- Gym Item 6 -->
+            <div class="gallery-item" data-id="6">
+                <img src="https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Swimming Pool">
+                <div class="gallery-item-overlay">
+                    <h3 class="gallery-item-title">Swimming Pool</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Modal Structure -->
+    <div class="modal" id="galleryModal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            
+            <div class="modal-media">
+                <!-- Media will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="modal-details">
+                <h2 class="modal-title" id="modalTitle">Facility Title</h2>
+                
+                <p class="modal-description" id="modalDescription">
+                    Detailed description will appear here.
+                </p>
+                
+                <div class="modal-features">
+                    <h3>Features</h3>
+                    <ul id="modalFeatures">
+                        <!-- Features will be inserted here by JavaScript -->
+                    </ul>
+                </div>
+                
+                <button class="modal-signup-btn">Sign Up Now</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gym facility data
+            const gymFacilities = {
+                1: {
+                    title: "Weight Training Area",
+                    description: "Our state-of-the-art weight training area is equipped with the latest machines and free weights to help you build strength and muscle. Perfect for both beginners and advanced lifters.",
+                    features: [
+                        "Over 50 different weight machines",
+                        "Dumbbells up to 100lbs",
+                        "Olympic lifting platforms",
+                        "Personal trainers available",
+                        "24/7 access for members"
+                    ],
+                    mediaType: "image",
+                    mediaSrc: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                },
+                2: {
+                    title: "Cardio Zone",
+                    description: "Burn calories and improve your cardiovascular health in our expansive cardio zone with top-of-the-line equipment offering scenic virtual routes.",
+                    features: [
+                        "30+ treadmills with touch screens",
+                        "Elliptical trainers with heart rate monitoring",
+                        "Stair climbers and rowing machines",
+                        "Virtual training programs",
+                        "TV screens on all equipment"
+                    ],
+                    mediaType: "video",
+                    mediaSrc: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4"
+                },
+                3: {
+                    title: "CrossFit Area",
+                    description: "Our dedicated CrossFit box features everything you need for high-intensity functional training with certified coaches guiding you through WODs.",
+                    features: [
+                        "Olympic weightlifting equipment",
+                        "Rig with pull-up bars",
+                        "Ropes, rings, and climbing ropes",
+                        "Specialized flooring",
+                        "Group classes throughout the day"
+                    ],
+                    mediaType: "image",
+                    mediaSrc: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                },
+                4: {
+                    title: "Yoga Studio",
+                    description: "Find your balance and inner peace in our serene yoga studio with classes for all levels, from gentle stretching to advanced power yoga.",
+                    features: [
+                        "Heated and non-heated classes",
+                        "Aerial yoga equipment",
+                        "Premium yoga mats provided",
+                        "Sound system for guided meditation",
+                        "Early morning and evening classes"
+                    ],
+                    mediaType: "image",
+                    mediaSrc: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                },
+                5: {
+                    title: "Boxing Ring",
+                    description: "Train like a champion in our professional boxing ring with heavy bags, speed bags, and expert trainers to help you with technique.",
+                    features: [
+                        "Competition-size boxing ring",
+                        "Full range of punching bags",
+                        "Private coaching available",
+                        "Boxing classes for all levels",
+                        "Gloves and wraps available for rent"
+                    ],
+                    mediaType: "video",
+                    mediaSrc: "https://samplelib.com/lib/preview/mp4/sample-10s.mp4"
+                },
+                6: {
+                    title: "Swimming Pool",
+                    description: "Our Olympic-sized swimming pool is perfect for lap swimming, aqua aerobics, or just cooling down after an intense workout.",
+                    features: [
+                        "25-meter lanes",
+                        "Heated to perfect temperature",
+                        "Aqua aerobics classes",
+                        "Swim instructors available",
+                        "Sauna and steam room adjacent"
+                    ],
+                    mediaType: "image",
+                    mediaSrc: "https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                }
+            };
+            
+            // Get DOM elements
+            const modal = document.getElementById('galleryModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const modalFeatures = document.getElementById('modalFeatures');
+            const modalMedia = document.querySelector('.modal-media');
+            const modalClose = document.querySelector('.modal-close');
+            const signupBtn = document.querySelector('.modal-signup-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            // Open modal with facility details
+            function openModal(facilityId) {
+                const facility = gymFacilities[facilityId];
+                
+                // Set the content
+                modalTitle.textContent = facility.title;
+                modalDescription.textContent = facility.description;
+                
+                // Clear and set features
+                modalFeatures.innerHTML = '';
+                facility.features.forEach(feature => {
+                    const li = document.createElement('li');
+                    li.textContent = feature;
+                    modalFeatures.appendChild(li);
+                });
+                
+                // Set media
+                modalMedia.innerHTML = '';
+                if (facility.mediaType === 'image') {
+                    const img = document.createElement('img');
+                    img.src = facility.mediaSrc;
+                    img.alt = facility.title;
+                    modalMedia.appendChild(img);
+                } else if (facility.mediaType === 'video') {
+                    const video = document.createElement('video');
+                    video.src = facility.mediaSrc;
+                    video.controls = true;
+                    video.autoplay = true;
+                    video.muted = true;
+                    modalMedia.appendChild(video);
+                }
+                
+                // Show modal
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Close modal
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                
+                // Pause any videos when closing
+                const video = modalMedia.querySelector('video');
+                if (video) {
+                    video.pause();
+                }
+            }
+            
+            // Event listeners
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const facilityId = this.getAttribute('data-id');
+                    openModal(facilityId);
+                });
+            });
+            
+            modalClose.addEventListener('click', closeModal);
+            
+            signupBtn.addEventListener('click', function() {
+                closeModal();
+                window.location.href = 'addmember.html';
+            });
+            
+            // Close modal when clicking outside content
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Close modal with ESC key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

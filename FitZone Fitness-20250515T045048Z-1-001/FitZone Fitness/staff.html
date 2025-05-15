@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+            color: white;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: rgba(15, 23, 42, 0.8);
+            padding: 20px 0;
+            height: 100vh;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h2 {
+            color: #f59e0b;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 3px solid #f59e0b;
+        }
+
+        .sidebar-menu a.active {
+            background-color: rgba(245, 158, 11, 0.2);
+            border-left: 3px solid #f59e0b;
+            color: #f59e0b;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            height: 100vh;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-header {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-header h2 {
+            color: #f59e0b;
+        }
+
+        /* Tooltip styles */
+        .has-tooltip {
+            position: relative;
+        }
+        
+        .tooltip {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: #1e2a3a;
+            border: 1px solid #f59e0b;
+            border-radius: 4px;
+            padding: 10px;
+            width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .has-tooltip:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .class-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .class-list li {
+            padding: 5px 0;
+            color: #f59e0b;
+            border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+        }
+        
+        .class-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Profile styles */
+        .profile-container {
+            background-color: rgba(15, 23, 42, 0.6);
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+        
+        .profile-header {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-avatar {
+            text-align: center;
+        }
+        
+        .avatar-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #f59e0b;
+            margin-bottom: 15px;
+        }
+        
+        .staff-name {
+            color: #f59e0b;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .staff-position {
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+        
+        .staff-contact p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .profile-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .detail-card {
+            background-color: rgba(30, 42, 58, 0.6);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 3px solid #f59e0b;
+        }
+        
+        .detail-card h4 {
+            color: #f59e0b;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .performance-stats {
+            display: flex;
+            justify-content: space-between;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 0 15px;
+        }
+        
+        .stat-value {
+            display: block;
+            font-size: 24px;
+            color: #f59e0b;
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* Form styles */
+        .form-container {
+            background-color: rgba(15, 23, 42, 0.6);
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #f59e0b;
+        }
+
+        .form-group input, 
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 4px;
+        }
+
+        .btn {
+            background-color: #f59e0b;
+            color: #1e2a3a;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #e69009;
+        }
+
+        /* Table styles */
+        .table-container {
+            background-color: rgba(15, 23, 42, 0.6);
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* log out funtion  */
+        .action-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin-left: 780px;
+  }
+
+  .btn-delete {
+    background-color: #e74c3c;
+    color: white;
+  }
+
+  .btn-delete:hover {
+    background-color: #c0392b;
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .btn-delete i {
+    margin-right: 8px;
+  }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Staff Dashboard</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a class="active" onclick="showSection('staff-profile')">About Staff</a></li>
+            <li><a onclick="showSection('add-member')">Add Member</a></li>
+            <li class="has-tooltip">
+                <a onclick="showSection('view-members')">View Members</a>
+                <div class="tooltip">
+                    <ul class="class-list">
+                        <li><a onclick="filterMembers('yoga')" href="view_members.php">Yoga</a></li>
+                        <li><a onclick="filterMembers('spin')" href="view_spin_registration.php">Spin</a></li>
+                        <li><a onclick="filterMembers('crossfit')" href="view_cross_registration.php">CrossFit</a></li>
+                        <li><a onclick="filterMembers('boxing')" href="view_box_registration.php">Boxing</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a onclick="showSection('add-class')">Add Class</a></li>
+            <li><a onclick="showSection('view-classes')">View Classes</a></li>
+            <li><a onclick="showSection('view-membership')">View Membership Plan</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <!-- Staff Profile Section -->
+        <section class="content-section active" id="staff-profile">
+            <div class="section-header">
+                <h2>Staff Profile</h2>
+                <button onclick="logout()" class="action-btn btn-delete">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                  </button>
+                  
+            </div>
+            
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <img src="img/staff.jpg" alt="Staff Avatar" class="avatar-img">
+                    </div>
+                    <div class="profile-info">
+                        <h3 class="staff-name">Vishnu</h3>
+                        <p class="staff-position">Senior Instructor</p>
+                        <div class="staff-contact">
+                            <p><i class="fas fa-envelope"></i> vishu15182@gmail.com</p>
+                            <p><i class="fas fa-phone"></i> +94 76 451 2547</p>
+                            <p><i class="fas fa-calendar-alt"></i> Joined: January 2020</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-details">
+                    <div class="detail-card">
+                        <h4><i class="fas fa-user"></i> About</h4>
+                        <p>Certified yoga instructor with 5+ years of experience specializing in Vinyasa and Hatha yoga. Passionate about helping students improve flexibility and reduce stress through mindful practice.</p>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <h4><i class="fas fa-certificate"></i> Certifications</h4>
+                        <ul>
+                            <li>RYT 500 Certified (Yoga Alliance)</li>
+                            <li>Yoga Therapy Certification</li>
+                            <li>CPR & First Aid Certified</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detail-card">
+                        <h4><i class="fas fa-chart-line"></i> Performance</h4>
+                        <div class="performance-stats">
+                            <div class="stat-item">
+                                <span class="stat-value">42</span>
+                                <span class="stat-label">Classes/Month</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">4.9</span>
+                                <span class="stat-label">Avg Rating</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">98%</span>
+                                <span class="stat-label">Attendance</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Add Member Section -->
+        <section class="content-section" id="add-member">
+            <div class="section-header">
+                <h2>Add New Member</h2>
+            </div>
+            <center>
+            <div class="form-container" id="formContainer">
+                <!-- Form will be loaded here dynamically -->
+            </div></center>
+        </section>
+        <!--  add class  -->
+        <section class="content-section" id="add-class">
+            <div class="section-header">
+                <h2>Add New Class</h2>
+            </div>
+            <center>
+            <div class="form-container" id="classFormContainer">
+
+            </div></center>
+        </section>
+
+    <!-- View Classes Section (replace your current view class section) -->
+        <section class="content-section" id="view-classes">
+            <div class="section-header">
+                <h2>Class Schedule</h2>
+            </div>
+            <div class="table-container" id="classTableContainer">
+                <!-- Table will be loaded here dynamically -->
+            </div>
+        </section>
+
+
+
+
+
+        <section class="content-section" id="view-membership">
+            <div class="section-header">
+                <h2>Membership Plans</h2>
+            </div>
+            <div class="table-container" id="membershipPlanContainer">
+                <!-- Membership plans will be loaded here dynamically -->
+            </div>
+        </section>
+    <script>
+
+
+
+
+// add member form
+ 
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("addmember.html")
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById("formContainer").innerHTML = html;
+        })
+        .catch(error => console.error("Failed to load form:", error));
+});
+
+
+
+// view mwmber form 
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("addmember.html")
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById("formContainer").innerHTML = html;
+        })
+        .catch(error => console.error("Failed to load form:", error));
+});
+
+// add class form 
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("class_view.php")
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById("classFormContainer").innerHTML = html;
+        })
+        .catch(error => console.error("Failed to load form:", error));
+});
+
+
+
+
+
+
+// view class form 
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("class.php")
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById("classTableContainer").innerHTML = html;
+        })
+        .catch(error => console.error("Failed to load form:", error));
+});
+
+
+// view membership plan form
+document.addEventListener("DOMContentLoaded", function() {
+    // Load membership plans
+    fetch("membership_plan_card.html")
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById("membershipPlanContainer").innerHTML = html;
+            
+            // Add edit functionality for staff
+            if (window.location.pathname.includes('staff_dashboard.html')) {
+                addMembershipEditFunctionality();
+            }
+        })
+        .catch(error => console.error("Failed to load membership plans:", error));
+});
+
+
+
+        // Show section function
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all menu items
+            document.querySelectorAll('.sidebar-menu a').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Show the selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Add active class to the clicked menu item
+            event.target.classList.add('active');
+        }
+
+        // Filter members by class type
+        function filterMembers(classType) {
+            // In a real application, this would filter the members table
+            alert(`Filtering members for ${classType} class`);
+            showSection('view-members');
+        }
+
+        // Initialize with staff profile showing
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('staff-profile').classList.add('active');
+            document.querySelector('.sidebar-menu a:first-child').classList.add('active');
+        });
+
+// logout function 
+        function logout() {
+    // Clear local/session storage
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // Redirect to login page
+    window.location.href = 'login.html'; // replace with your login page
+  }
+
+
+  function logout() {
+  if (confirm("Are you sure you want to log out?")) {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = 'admin_staff_login.html';
+  }
+}
+    </script>
+</body>
+</html>

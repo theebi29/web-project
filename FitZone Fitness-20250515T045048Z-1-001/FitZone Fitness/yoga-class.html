@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga & Meditation Class | PowerFit Gym</title>
+    <style>
+        :root {
+            --primary: #81a9c8;
+            --secondary: #e8c07d;
+            --light: #f0f4f8;
+            --dark: #0f172a;
+            --accent: #f87171;
+        }
+        
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+            /* color: var(--light); */
+            color: #f59e0b;
+            border-color: #f59e0b;
+
+
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--primary);
+            color: var(--dark);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 20px 0;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .class-detail-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(240, 244, 248, 0.1);
+        }
+        
+        .class-detail-header h1 {
+            font-size: 2.8rem;
+            color: #f59e0b;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .price {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .class-detail-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .class-main-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 500px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        .class-main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+        
+        .class-main-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .class-details {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .class-schedule {
+            background: rgba(30, 42, 58, 0.6);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 1px solid rgba(240, 244, 248, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .class-schedule h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .class-schedule ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .class-schedule li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(240, 244, 248, 0.05);
+            display: flex;
+            align-items: center;
+        }
+        
+        .class-schedule li::before {
+            content: '•';
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        
+        .class-schedule li:last-child {
+            border-bottom: none;
+        }
+        
+        .class-benefits {
+            margin-top: 40px;
+        }
+        
+        .class-benefits ul {
+            list-style-type: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        
+        .class-benefits li {
+            padding: 15px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            background-color: rgba(129, 169, 200, 0.1);
+            border-left: 3px solid var(--primary);
+        }
+        
+        .class-benefits li::before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .join-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--dark);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .join-btn:hover {
+            background-color: #f59e0b;
+            /* border-color: #f59e0b; */
+
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+            color: white;
+        }
+        
+        .instructor-section {
+            background: rgba(30, 42, 58, 0.6);
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(240, 244, 248, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .instructor-profile {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .instructor-profile img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .instructor-profile h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .testimonials {
+            background: rgba(30, 42, 58, 0.6);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid rgba(240, 244, 248, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .testimonial {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(240, 244, 248, 0.05);
+        }
+        
+        .testimonial:last-child {
+            border-bottom: none;
+        }
+        
+        .testimonial p:first-child {
+            font-style: italic;
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .testimonial p:first-child::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 3rem;
+            color: rgba(129, 169, 200, 0.3);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial p:last-child {
+            font-weight: 600;
+            color: var(--primary);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        @media (max-width: 768px) {
+            .class-detail-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .class-main-image {
+                height: 350px;
+            }
+            
+            .instructor-profile {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- <a href="#classes" class="back-btn">← Back to Classes</a> -->
+        
+        <div class="class-detail-header">
+            <h1>Yoga & Meditation Class</h1>
+            <p class="price">300/= per class or 4000/=month</p>
+        </div>
+        
+        <div class="class-detail-content">
+            <div class="class-main-image">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Yoga Class">
+            </div>
+            
+            <div class="class-details">
+                <h2>About This Class</h2>
+                <p>Our Yoga & Meditation class is designed for all skill levels, from beginners to advanced practitioners. Each session combines physical postures, breathing exercises, and meditation to improve your overall well-being.</p>
+                
+                <div class="class-schedule">
+                    <h3>Class Schedule</h3>
+                    <ul>
+                        <li>Monday: 7:00 AM - 8:00 AM (Hatha Yoga)</li>
+                        <li>Wednesday: 6:00 PM - 7:00 PM (Vinyasa Flow)</li>
+                        <li>Friday: 7:00 AM - 8:00 AM (Restorative Yoga)</li>
+                        <li>Saturday: 9:00 AM - 10:30 AM (Yoga + Meditation)</li>
+                    </ul>
+                </div>
+                
+                <div class="class-benefits">
+                    <h3>Benefits</h3>
+                    <ul>
+                        <li>Improves flexibility and balance</li>
+                        <li>Reduces stress and anxiety</li>
+                        <li>Enhances mental clarity and focus</li>
+                        <li>Strengthens core muscles</li>
+                        <li>Promotes better sleep</li>
+                    </ul>
+                </div>
+                
+                <a href="yoga.html" class="join-btn">Join This Class</a>
+            </div>
+        </div>
+        
+        <div class="instructor-section">
+            <h2>Meet Your Instructor</h2>
+            <div class="instructor-profile">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Instructor">
+                <div>
+                    <h3>Sarah Johnson</h3>
+                    <p>Certified Yoga Instructor with 10+ years of experience. Sarah specializes in Hatha and Vinyasa yoga and has helped hundreds of students improve their practice.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="testimonials">
+            <h2>What Our Members Say</h2>
+            <div class="testimonial">
+                <p>The yoga classes at PowerFit have transformed my life. I'm more flexible and less stressed after just a month!</p>
+                <p>- Michael T.</p>
+            </div>
+            <div class="testimonial">
+                <p>Sarah is an amazing instructor who makes everyone feel comfortable, regardless of their skill level.</p>
+                <p>- Jennifer L.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

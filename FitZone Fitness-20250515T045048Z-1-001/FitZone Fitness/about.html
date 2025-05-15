@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitZone Fitness Center</title>
+    <link rel="icon" href="img/icon.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+        color: #ffffff;
+        min-height: 100vh;
+    }
+
+    /* Vision & Mission section */
+    .vision-mission-section {
+        padding: 80px 20px;
+        background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+    }
+
+    .vision-mission-wrapper {
+        max-width: 1300px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+    }
+
+    .vision-box, .mission-box {
+        background: rgba(30, 42, 58, 0.5);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .vision-box {
+        border-top: 5px solid #d79447;
+    }
+
+    .mission-box {
+        border-top: 5px solid #4d8cff;
+    }
+
+    .section-header {
+        font-size: 2.5rem;
+        margin-bottom: 25px;
+        color: #d79447;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .vision-header {
+        color: #d79447;
+    }
+
+    .mission-header {
+        color: #4d8cff;
+    }
+
+    .vision-text, .mission-text {
+        color: #e5e5e5;
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+
+    /* About section style */
+    .about-section {
+        padding: 80px 20px;
+        background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+    }
+
+    .container {
+        max-width: 1300px;
+        margin: 0 auto;
+    }
+
+    .about-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+    }
+
+    .about-image {
+        position: relative;
+    }
+
+    .about-image img {
+        width: 500px;
+        height: 500px;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        object-fit: cover;
+        position: relative;
+        z-index: 1;
+    }
+
+    .experience-box {
+        position: absolute;
+        top: -40px;
+        right: -15px;
+        background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        z-index: 2;
+    }
+
+    .experience-number {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #d79447; 
+        line-height: 1;
+        margin-bottom: 5px;
+    }
+
+    .experience-text {
+        color: #ffffff;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        margin: 0 0 25px 0;
+        line-height: 1.2;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #d79447;
+    }
+
+    .about-text {
+        color: #e5e5e5;
+        line-height: 1.8;
+        margin-bottom: 30px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 40px;
+    }
+
+    .stat-item {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.05);
+        padding: 20px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-item:hover {
+        transform: translateY(-5px);
+        background: rgba(249, 172, 84, 0.1);
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #d79447; 
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        color: #ffffff;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Why Choose Us Section */
+    .why-choose-section {
+        padding: 80px 20px;
+        background: linear-gradient(145deg, #0f172a 0%, #1e2a3a 100%);
+    }
+
+    .section-subtitle {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #e5e5e5;
+        max-width: 700px;
+        margin: 0 auto 50px;
+        line-height: 1.8;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 40px;
+    }
+
+    .feature-card {
+        background: rgba(30, 42, 58, 0.5);
+        padding: 40px 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        background: rgba(30, 42, 58, 0.8);
+    }
+
+    .feature-icon {
+        font-size: 3rem;
+        color: #d79447;
+        margin-bottom: 20px;
+    }
+
+    .feature-title {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #ffffff;
+    }
+
+    .feature-text {
+        color: #e5e5e5;
+        line-height: 1.8;
+    }
+
+    /* Success Stories Section */
+    .success-stories-section {
+        padding: 80px 20px;
+        background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+    }
+
+    .stories-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+        margin-top: 50px;
+    }
+
+    .story-card {
+        background: rgba(30, 42, 58, 0.5);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        gap: 25px;
+        align-items: center;
+    }
+
+    .story-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #d79447;
+    }
+
+    .story-content {
+        flex: 1;
+    }
+
+    .story-name {
+        font-size: 1.5rem;
+        color: #d79447;
+        margin-bottom: 10px;
+    }
+
+    .story-achievement {
+        font-size: 1rem;
+        color: #4d8cff;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+    .story-text {
+        color: #e5e5e5;
+        line-height: 1.8;
+        font-size: 0.95rem;
+    }
+
+    /* User Feedback Section */
+    .feedback-section {
+        padding: 80px 20px;
+        background: linear-gradient(145deg, #0f172a 0%, #1e2a3a 100%);
+    }
+
+    .feedback-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 50px;
+    }
+
+    .feedback-card {
+        background: rgba(30, 42, 58, 0.5);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+
+    .feedback-card:before {
+        content: '"';
+        font-size: 5rem;
+        color: rgba(215, 148, 71, 0.1);
+        position: absolute;
+        top: 10px;
+        left: 20px;
+        line-height: 1;
+    }
+
+    .feedback-text {
+        color: #e5e5e5;
+        line-height: 1.8;
+        margin-bottom: 25px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .feedback-author {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .author-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .author-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .author-name {
+        font-size: 1.1rem;
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    .author-title {
+        font-size: 0.9rem;
+        color: #d79447;
+    }
+
+    .rating {
+        color: #d79447;
+        margin-top: 5px;
+    }
+
+    /* Responsive design */
+    @media (max-width: 1200px) {
+        .vision-mission-wrapper, .about-wrapper {
+            grid-template-columns: 1fr;
+        }
+        
+        .about-image {
+            margin: 0 auto;
+        }
+        
+        .vision-box, .mission-box {
+            margin-bottom: 30px;
+        }
+
+        .features-grid, .stories-grid, .feedback-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .section-header, .section-title {
+            font-size: 2rem;
+        }
+        
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .features-grid, .stories-grid, .feedback-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .story-card {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .about-image img {
+            width: 100%;
+            height: auto;
+        }
+        
+        .experience-box {
+            position: relative;
+            top: auto;
+            right: auto;
+            margin-top: 20px;
+        }
+        
+        .vision-box, .mission-box {
+            padding: 25px;
+        }
+
+        .feature-card {
+            padding: 30px 20px;
+        }
+    }
+</style>
+
+<body>
+    <!-- Vision & Mission Section -->
+    <section class="vision-mission-section">
+        <div class="vision-mission-wrapper">
+            <div class="vision-box">
+                <h2 class="section-header vision-header">Our Vision</h2>
+                <p class="vision-text">
+                    To be the leading fitness center that transforms lives by empowering individuals to achieve their highest potential through innovative training methods, holistic wellness approaches, and a supportive community environment.
+                </p>
+                <p class="vision-text">
+                    We envision a world where fitness is accessible to all, where every individual can experience the life-changing benefits of health and wellness, regardless of their starting point.
+                </p>
+            </div>
+            
+            <div class="mission-box">
+                <h2 class="section-header mission-header">Our Mission</h2>
+                <p class="mission-text">
+                    To provide exceptional fitness experiences through world-class facilities, expert coaching, and personalized programs that inspire and enable our members to reach their health and fitness goals.
+                </p>
+                <p class="mission-text">
+                    We are committed to creating a welcoming, inclusive environment that fosters personal growth, community connection, and sustainable lifestyle changes for all our members.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-wrapper">
+                <div class="about-image">
+                    <img src="img/third-trainer.jpg" alt="Gym Interior">
+                    <div class="experience-box">
+                        <div class="experience-number">15+</div>
+                        <div class="experience-text">Years Experience</div>
+                    </div>
+                </div>
+                <div class="about-content">
+                    <h2 class="section-title">Transform Your Body With Our Expert Trainers</h2>
+                    <p class="about-text">
+                        Welcome to a state-of-the-art fitness facility where we combine cutting-edge equipment with expert guidance to help you achieve your fitness goals. Our experienced trainers are dedicated to providing personalized attention and support throughout your fitness journey.
+                    </p>
+                    <p class="about-text">
+                        We believe in creating a motivating and inclusive environment where everyone, regardless of their fitness level, can work towards their personal best. Our comprehensive approach combines training, nutrition, and recovery to ensure sustainable results.
+                    </p>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">5000+</div>
+                            <div class="stat-label">Happy Members</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">40+</div>
+                            <div class="stat-label">Expert Trainers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100+</div>
+                            <div class="stat-label">Fitness Classes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-section">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center;">Why Choose FitZone</h2>
+            <p class="section-subtitle">
+                We're committed to providing an exceptional fitness experience that goes beyond just workouts. Here's what sets us apart from the rest.
+            </p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3 class="feature-title">Certified Experts</h3>
+                    <p class="feature-text">
+                        Our trainers hold top certifications and have years of experience helping clients achieve remarkable transformations through personalized coaching.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3 class="feature-title">Premium Equipment</h3>
+                    <p class="feature-text">
+                        Train with the latest fitness technology and high-quality equipment from leading brands to maximize your results safely and effectively.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 class="feature-title">Holistic Approach</h3>
+                    <p class="feature-text">
+                        We combine fitness training with nutrition guidance and recovery strategies for complete wellness and sustainable results.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">Supportive Community</h3>
+                    <p class="feature-text">
+                        Join a welcoming community of like-minded individuals who motivate and inspire each other to reach new heights.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Flexible Scheduling</h3>
+                    <p class="feature-text">
+                        With extended hours and diverse class schedules, we make it easy to fit fitness into your busy lifestyle.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3 class="feature-title">Proven Results</h3>
+                    <p class="feature-text">
+                        Our evidence-based programs have helped thousands of members achieve and often exceed their fitness goals.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section class="success-stories-section">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center;">Success Stories</h2>
+            <p class="section-subtitle">
+                Real people, real transformations. See how our members have changed their lives with FitZone.
+            </p>
+            <div class="stories-grid">
+                <div class="story-card">
+                    <img src="img/triner1.webp" alt="Sarah's Transformation" class="story-image">
+                    <div class="story-content">
+                        <h3 class="story-name">Sarah Johnson</h3>
+                        <p class="story-achievement">Lost 45lbs in 6 months</p>
+                        <p class="story-text">
+                            "FitZone changed my life completely. After years of struggling with my weight, the personalized training and nutrition plan helped me lose 45 pounds and keep it off. I've never felt better!"
+                        </p>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="img/trainer3.avif" alt="Mike's Transformation" class="story-image">
+                    <div class="story-content">
+                        <h3 class="story-name">Mike Rodriguez</h3>
+                        <p class="story-achievement">Gained 20lbs of muscle</p>
+                        <p class="story-text">
+                            "As a former skinny guy, I never thought I could build muscle. The trainers at FitZone designed a perfect program for my body type. In 8 months, I transformed my physique completely."
+                        </p>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="img/trainer3.avif" alt="Lisa's Transformation" class="story-image">
+                    <div class="story-content">
+                        <h3 class="story-name">Lisa Chen</h3>
+                        <p class="story-achievement">Ran first marathon at 50</p>
+                        <p class="story-text">
+                            "At 50, I decided to run my first marathon. FitZone's endurance training program prepared me physically and mentally. Crossing that finish line was the proudest moment of my life."
+                        </p>
+                    </div>
+                </div>
+                <div class="story-card">
+                    <img src="img/triner2.jpeg" alt="David's Transformation" class="story-image">
+                    <div class="story-content">
+                        <h3 class="story-name">David Wilson</h3>
+                        <p class="story-achievement">Overcame back injury</p>
+                        <p class="story-text">
+                            "After a serious back injury, doctors said I might never lift weights again. FitZone's rehabilitation specialists helped me recover and now I'm stronger than before my injury."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Feedback Section -->
+    <section class="feedback-section">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center;">What Our Members Say</h2>
+            <p class="section-subtitle">
+                Don't just take our word for it. Here's what our community has to say about their FitZone experience.
+            </p>
+            <div class="feedback-grid">
+                <div class="feedback-card">
+                    <p class="feedback-text">
+                        The trainers at FitZone are incredibly knowledgeable and supportive. They pushed me beyond what I thought was possible and helped me achieve my fitness goals faster than I imagined.
+                    </p>
+                    <div class="feedback-author">
+                        <img src="img/triner1.webp" alt="Emily Parker" class="author-image">
+                        <div class="author-info">
+                            <span class="author-name">Emily Parker</span>
+                            <span class="author-title">Member for 3 years</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feedback-card">
+                    <p class="feedback-text">
+                        I've been to many gyms before, but FitZone stands out for its community feel. It's not just a gym, it's a family. The facilities are top-notch and always clean, which is so important to me.
+                    </p>
+                    <div class="feedback-author">
+                        <img src="img/triner2.jpeg" alt="James Wilson" class="author-image">
+                        <div class="author-info">
+                            <span class="author-name">James Wilson</span>
+                            <span class="author-title">Member for 2 years</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feedback-card">
+                    <p class="feedback-text">
+                        The variety of classes is amazing! From high-intensity workouts to yoga and recovery sessions, there's something for every mood and fitness level. I never get bored with my routine here.
+                    </p>
+                    <div class="feedback-author">
+                        <img src="img/triner5.jpg" alt="Sophia Martinez" class="author-image">
+                        <div class="author-info">
+                            <span class="author-name">Sophia Martinez</span>
+                            <span class="author-title">Member for 1 year</span>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

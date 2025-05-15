@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrossFit Class | PowerFit Gym</title>
+    <style>
+        /* Reusable Styles */
+        body {
+            background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #f59e0b;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background:#f59e0b;
+            color: #0f172a;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .back-btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .class-detail-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .class-detail-header h1 {
+            color: #f59e0b;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .price {
+            font-weight: bold;
+            color: #eeeaea;
+            font-size: 1.5rem;
+        }
+        
+        .class-detail-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .class-main-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .class-main-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            transition: transform 0.5s ease;
+        }
+        
+        .class-main-image img:hover {
+            transform: scale(1.02);
+        }
+        
+        .class-details {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .class-details h2 {
+            color: #81a9c8;
+            margin-top: 0;
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+        
+        .class-schedule {
+            background: rgba(0, 2, 30, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            color: #e8c07d;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-left: 4px solid #ff6b6b;
+            backdrop-filter: blur(5px);
+        }
+        
+        .class-schedule h3 {
+            margin-top: 0;
+            color: #81a9c8;
+        }
+        
+        .class-schedule ul {
+            padding-left: 20px;
+        }
+        
+        .class-schedule li {
+            margin-bottom: 8px;
+        }
+        
+        .class-benefits ul {
+            padding-left: 20px;
+        }
+        
+        .class-benefits li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .class-benefits li::before {
+            content: "▹";
+            color: #ff6b6b;
+            position: absolute;
+            left: 0;
+        }
+        
+        .instructor-section {
+            margin-top: 50px;
+            background: rgba(30, 42, 58, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 1px solid rgba(129, 169, 200, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .instructor-profile {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .instructor-profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ff6b6b;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .instructor-profile h3 {
+            color: #81a9c8;
+            margin-bottom: 5px;
+        }
+        
+        .testimonials {
+            margin-top: 50px;
+        }
+        
+        .testimonial {
+            background: rgba(30, 42, 58, 0.7);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-left: 4px solid #ff6b6b;
+            backdrop-filter: blur(5px);
+        }
+        
+        .testimonial p:first-child {
+            font-style: italic;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .testimonial p:first-child::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 3rem;
+            color: rgba(129, 169, 200, 0.3);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial p:last-child {
+            font-weight: bold;
+            color: #81a9c8;
+            margin-top: 10px;
+        }
+        
+        .join-btn {
+            display: inline-block;
+            background: #ff6b6b;
+            color: #0f172a;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .join-btn:hover {
+            background-color: #f59e0b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        
+        /* CrossFit Specific Styles */
+        .workout-types {
+            margin: 30px 0;
+            background: rgba(30, 42, 58, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .workout-types h3 {
+            color: #81a9c8;
+            margin-top: 0;
+        }
+        
+        .workout-types ul {
+            columns: 2;
+            padding-left: 20px;
+        }
+        
+        .workout-types li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .workout-types li::before {
+            content: "•";
+            color: #ff6b6b;
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .workout-types ul {
+                columns: 1;
+            }
+            
+            .instructor-profile {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- <a href="home.html#classes" class="back-btn">← Back to Classes</a> -->
+    
+    <div class="class-detail-header">
+        <h1>CrossFit Training</h1>
+        <p class="price">$20 per class or $150/month</p>
+    </div>
+    
+    <div class="class-detail-content">
+        <div class="class-main-image">
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="CrossFit Class">
+        </div>
+        
+        <div class="class-details">
+            <h2>About This Class</h2>
+            <p>Our CrossFit program combines high-intensity functional movements with strength training to deliver maximum results. Each workout is different and scaled to individual abilities, making it perfect for all fitness levels.</p>
+            
+            <div class="class-schedule">
+                <h3>Class Schedule</h3>
+                <ul>
+                    <li>Tuesday: 6:00 AM - 7:00 AM (Strength Focus)</li>
+                    <li>Thursday: 6:00 AM - 7:00 AM (Metcon Challenge)</li>
+                    <li>Saturday: 6:00 AM - 7:00 AM (Hero WOD)</li>
+                    <li>Sunday: 4:00 PM - 5:00 PM (Open Gym)</li>
+                </ul>
+            </div>
+            
+            <div class="workout-types">
+                <h3>Workout Types</h3>
+                <ul>
+                    <li>AMRAP (As Many Rounds As Possible)</li>
+                    <li>EMOM (Every Minute On the Minute)</li>
+                    <li>For Time Workouts</li>
+                    <li>Strength Cycles</li>
+                    <li>Olympic Lifting</li>
+                    <li>Gymnastics Movements</li>
+                    <li>Endurance Training</li>
+                    <li>Mobility Work</li>
+                </ul>
+            </div>
+            
+            <div class="class-benefits">
+                <h3>Key Benefits</h3>
+                <ul>
+                    <li>Increases strength and power</li>
+                    <li>Improves cardiovascular endurance</li>
+                    <li>Enhances mobility and flexibility</li>
+                    <li>Builds lean muscle mass</li>
+                    <li>Boosts metabolism for hours after workout</li>
+                    <li>Develops functional fitness for everyday life</li>
+                </ul>
+            </div>
+            
+            <a href="cross.html" class="join-btn">Join This Class</a>
+        </div>
+    </div>
+    
+    <div class="instructor-section">
+        <h2>Meet Your Coach</h2>
+        <div class="instructor-profile">
+            <img src="https://images.unsplash.com/photo-1560250056-07ba64664864?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Coach Mike Rodriguez">
+            <div>
+                <h3>Mike Rodriguez</h3>
+                <p>CrossFit Level 3 Trainer with 8 years of coaching experience. Mike has competed in regional CrossFit competitions and specializes in Olympic weightlifting technique. His passion is helping athletes unlock their full potential.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="testimonials">
+        <h2>Member Transformations</h2>
+        <div class="testimonial">
+            <p>"In just 3 months of CrossFit at PowerFit, I've lost 20 pounds and gained more strength than I had in my 20s. The community keeps me motivated!"</p>
+            <p>- David K.</p>
+        </div>
+        <div class="testimonial">
+            <p>"Coach Mike's attention to form and technique gave me the confidence to lift heavier than I ever thought possible. The workouts are tough but incredibly rewarding."</p>
+            <p>- Sarah M.</p>
+        </div>
+    </div>
+</body>
+</html>

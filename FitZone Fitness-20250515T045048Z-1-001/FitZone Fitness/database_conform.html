@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Confirmation | PowerFit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #e2e8f0;
+        }
+        
+        .confirmation-container {
+            background: rgba(30, 42, 58, 0.8);
+            padding: 50px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .success-icon {
+            color: #4CAF50;
+            font-size: 80px;
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+        }
+        
+        h1 {
+            color: #f59e0b;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        p {
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #f59e0b;
+            color: #1e2a3a;
+            padding: 14px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: transparent;
+            color: #f59e0b;
+            border-color: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.2);
+        }
+        
+        @media (max-width: 600px) {
+            .confirmation-container {
+                padding: 30px 20px;
+                margin: 0 15px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="success-icon">✓</div>
+        <h1>Welcome to fitzone!</h1>
+        <p>Your Elite Membership registration is complete. You now have full access to our premium facilities, 24/7 gym access, and exclusive member benefits. A confirmation email has been sent to your registered address.</p>
+        <!-- <a href="login.html" class="btn">Access Your Account</a> -->
+    </div>
+</body>
+</html>

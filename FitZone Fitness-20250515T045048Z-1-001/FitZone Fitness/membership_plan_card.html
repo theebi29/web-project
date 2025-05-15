@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <style>
+
+         /* Global Styles */
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Arial', sans-serif;
+ }
+ body {
+     background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+     color: #e2e8f0;
+     line-height: 1.6;
+     min-height: 100vh;
+ }
+          /* Membership Section */
+  .membership-plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+  }
+  .plan-card {
+      background-color: rgba(30, 42, 58, 0.7);
+      border-radius: 15px;
+      padding: 40px 30px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      transition: all 0.3s;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      /* height: 300px; */
+  }
+  .plan-card:hover {
+      transform: translateY(-40px);
+      background-color: black;
+      color:white;
+  }
+  .plan-card h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #f59e0b;
+  }
+  .plan-card .price {
+      font-size: 42px;
+      font-weight: bold;
+      color: #f59e0b;
+      margin-bottom: 25px;
+  }
+  .plan-card .price span {
+      font-size: 16px;
+      color: #94a3b8;
+  }
+  .plan-card ul {
+      list-style: none;
+      margin-bottom: 30px;
+  }
+  .plan-card ul li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+  }
+  .plan-card .join-btn {
+      display: inline-block;
+      background-color: #f59e0b;
+      color: #1e2a3a;
+      padding: 12px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+  }
+  .plan-card .join-btn:hover {
+     background-color: transparent;
+     color: #f59e0b;
+     border-color: #f59e0b;
+ }
+    </style>
+
+
+<body>
+    
+
+ <!-- Membership Section -->
+ <section id="membership" class="section">
+    <div class="container">
+        <div class="section-title">
+            <center>
+                <h2>Membership Plans</h2>
+                <p>Choose the perfect plan for your fitness journey</p>
+            </center>
+        </div><br><br><br>
+        <div class="membership-plans">
+            <div class="plan-card">
+                <h3>Basic</h3>
+                <div class="price">2000/-<span>/month</span></div>
+                <ul>
+                    <li>Access to cardio area</li>
+                    <li>Access to weight room</li>
+                    <li>Locker room access</li>
+                    <li>Free WiFi</li>
+                    <li>No contract</li>
+                </ul>
+                <a href="basicmembership.html" class="join-btn">Join Now</a>
+            </div>
+            <div class="plan-card">
+                <h3>Premium</h3>
+                <div class="price">3500/-<span>/month</span></div>
+                <ul>
+                    <li>All Basic benefits</li>
+                    <li>Unlimited group classes</li>
+                    <li>Sauna access</li>
+                    <li>1 free personal training session</li>
+                    <li>No contract</li>
+                </ul>
+                <a href="premium_class.html" class="join-btn">Join Now</a>
+            </div>
+            <div class="plan-card">
+                <h3>Elite</h3>
+                <div class="price">5000/-<span>/month</span></div>
+                <ul>
+                    <li>All Premium benefits</li>
+                    <li>Unlimited personal training</li>
+                    <li>24/7 access</li>
+                    <li>Nutrition consultation</li>
+                    <li>Massage discounts</li>
+                </ul>
+                <a href="elite_membership.html" class="join-btn">Join Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

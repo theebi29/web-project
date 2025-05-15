@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin Cycling Class | PowerFit Gym</title>
+    <style>
+        /* Main Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #f0f4f8;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+            min-height: 100vh;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: #ff6b6b;
+            color: #0f172a;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .back-btn:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .class-detail-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .class-detail-header h1 {
+            color: #f59e0b;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .price {
+            font-weight: bold;
+            color: #f1ebeb;
+            font-size: 1.5rem;
+        }
+        
+        .class-detail-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .class-main-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        
+        .class-main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .class-main-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .class-details {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .class-details h2 {
+            color: #81a9c8;
+            margin-top: 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #ff6b6b;
+            display: inline-block;
+        }
+        
+        /* Schedule Styles */
+        .class-schedule {
+            background: rgba(0, 2, 30, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-left: 4px solid #ff6b6b;
+            backdrop-filter: blur(5px);
+        }
+        
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .schedule-item {
+            background: rgba(129, 169, 200, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid rgba(129, 169, 200, 0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .schedule-item:hover {
+            transform: translateY(-3px);
+            background: rgba(129, 169, 200, 0.2);
+        }
+        
+        .schedule-item strong {
+            color: #e8c07d;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        /* Benefits Styles */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .benefit-card {
+            background: rgba(30, 42, 58, 0.7);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-top: 3px solid #ff6b6b;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-card h4 {
+            color: #ff6b6b;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        /* Instructor Section */
+        .instructor-section {
+            margin-top: 50px;
+            background: rgba(30, 42, 58, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 1px solid rgba(129, 169, 200, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        .instructor-profile {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .instructor-profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ff6b6b;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .instructor-profile h3 {
+            color: #81a9c8;
+            margin-bottom: 10px;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            margin-top: 50px;
+        }
+        
+        .testimonial {
+            background: rgba(30, 42, 58, 0.7);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-left: 4px solid #ff6b6b;
+            backdrop-filter: blur(5px);
+        }
+        
+        .testimonial p:first-child {
+            font-style: italic;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .testimonial p:first-child::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -10px;
+            font-size: 3rem;
+            color: rgba(129, 169, 200, 0.3);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial p:last-child {
+            font-weight: bold;
+            color: #81a9c8;
+            margin-top: 15px;
+        }
+        
+        /* Join Button */
+        .join-btn {
+            display: inline-block;
+            background: #ff6b6b;
+            color: #0f172a;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+        
+        .join-btn:hover {
+            background:#f59e0b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .instructor-profile {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .class-detail-header h1 {
+                font-size: 2rem;
+            }
+            
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- <a href="home#classes" class="back-btn">← Back to Classes</a> -->
+    
+    <div class="class-detail-header">
+        <h1>Spin Cycling Class</h1>
+        <p class="price">$12 per class or $100/month</p>
+    </div>
+    
+    <div class="class-detail-content">
+        <div class="class-main-image">
+            <img src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Spin Cycling Class">
+        </div>
+        
+        <div class="class-details">
+            <h2>About This Class</h2>
+            <p>Our high-energy Spin Cycling classes combine intense cardio workouts with motivating music and expert instruction. Whether you're a beginner or seasoned cyclist, our classes will push you to new levels of endurance and performance.</p>
+            
+            <div class="class-schedule">
+                <h3>Class Schedule</h3>
+                <div class="schedule-grid">
+                    <div class="schedule-item">
+                        <strong>Monday</strong>
+                        <p>6:00 PM - 7:00 PM<br>(Endurance Ride)</p>
+                    </div>
+                    <div class="schedule-item">
+                        <strong>Wednesday</strong>
+                        <p>6:00 PM - 7:00 PM<br>(Hill Climb Challenge)</p>
+                    </div>
+                    <div class="schedule-item">
+                        <strong>Friday</strong>
+                        <p>6:00 PM - 7:00 PM<br>(Sprint Intervals)</p>
+                    </div>
+                    <div class="schedule-item">
+                        <strong>Sunday</strong>
+                        <p>9:00 AM - 10:00 AM<br>(Scenic Long Ride)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Key Benefits</h3>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h4>Cardio Boost</h4>
+                    <p>Improve cardiovascular health and endurance with high-intensity interval training.</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Calorie Burn</h4>
+                    <p>Burn 400-600 calories per session for effective weight management.</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Low Impact</h4>
+                    <p>Joint-friendly workout that's easier on knees than running.</p>
+                </div>
+                <div class="benefit-card">
+                    <h4>Leg Strength</h4>
+                    <p>Build powerful leg muscles and improve lower body tone.</p>
+                </div>
+            </div>
+            
+            <a href="spin.html" class="join-btn">Join This Class</a>
+        </div>
+    </div>
+    
+    <div class="instructor-section">
+        <h2>Meet Your Instructor</h2>
+        <div class="instructor-profile">
+            <img src="https://images.unsplash.com/photo-1583864697784-a0efc8379f70?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Lisa Chen">
+            <div>
+                <h3>Lisa Chen</h3>
+                <p>Certified Cycling Instructor with 5 years of experience. Lisa brings incredible energy to every class with her perfectly curated playlists and motivational coaching style. She's competed in multiple cycling events and loves helping riders achieve their fitness goals.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="testimonials">
+        <h2>What Our Riders Say</h2>
+        <div class="testimonial">
+            <p>"Lisa's Friday night spin class is the highlight of my week! The energy is electric and I leave feeling accomplished every time."</p>
+            <p>- Michael R.</p>
+        </div>
+        <div class="testimonial">
+            <p>"I've lost 15 pounds in 2 months just by attending spin class 3 times a week. The results speak for themselves!"</p>
+            <p>- Sarah K.</p>
+        </div>
+    </div>
+</body>
+</html>

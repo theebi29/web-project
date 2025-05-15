@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Plan Registration</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: #e2e8f0;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(30, 42, 58, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .plan-card {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 40px;
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .plan-card h3 {
+            font-size: 28px;
+            margin: 0 0 10px;
+            color: #f59e0b;
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 0 0 20px;
+            color: #f59e0b;
+        }
+        
+        .price span {
+            font-size: 16px;
+            font-weight: normal;
+            color: #94a3b8;
+        }
+        
+        .plan-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px;
+        }
+        
+        .plan-card li {
+            padding: 10px 0;
+            position: relative;
+            padding-left: 30px;
+            color: #cbd5e1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .plan-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #f59e0b;
+            font-weight: bold;
+        }
+        
+        .join-btn {
+            background: #f59e0b;
+            color: #1e2a3a;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 16px;
+            border: 2px solid transparent;
+        }
+        
+        .join-btn:hover {
+            background: transparent;
+            color: #f59e0b;
+            border-color: #f59e0b;
+            transform: translateY(-2px);
+        }
+        
+        .registration-form {
+            padding: 40px;
+            width: 60%;
+        }
+        
+        .registration-form h2 {
+            color: #f59e0b;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 28px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #f59e0b;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 14px;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 16px;
+            color: #e2e8f0;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: #f59e0b;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+        }
+        
+        .submit-btn {
+            background: #f59e0b;
+            color: #1e2a3a;
+            border: none;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 10px;
+            border: 2px solid transparent;
+        }
+        
+        .submit-btn:hover {
+            background: transparent;
+            color: #f59e0b;
+            border-color: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.2);
+        }
+        
+        .success-message {
+            color: #4CAF50;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        
+        .error-message {
+            color: #f44336;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .plan-card, .registration-form {
+                width: 100%;
+            }
+            
+            .plan-card {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="plan-card">
+            <h3>Premium Plan</h3>
+            <div class="price">3500/= <span>/month</span></div>
+            <ul>
+                <li>All Basic benefits</li>
+                <li>Unlimited group classes</li>
+                <li>Sauna access</li>
+                <li>1 free personal training session</li>
+                <li>No contract</li>
+                <li>24/7 gym access</li>
+                <li>Nutrition consultation</li>
+            </ul>
+        </div>
+        
+        <div class="registration-form">
+            <h2>Register for Premium Plan</h2>
+            <form action="premium_class.php" method="POST">
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">Complete Registration</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

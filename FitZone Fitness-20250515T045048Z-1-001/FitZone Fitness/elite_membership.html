@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Membership Registration</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(145deg, #1e2a3a 0%, #0f172a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: #e2e8f0;
+        }
+        
+        .container {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(30, 42, 58, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .plan-card {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 50px;
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plan-card::before {
+            content: "ELITE";
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #f59e0b;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .plan-card h3 {
+            font-size: 32px;
+            margin: 0 0 15px;
+            color: #f59e0b;
+            position: relative;
+        }
+        
+        .price {
+            font-size: 52px;
+            font-weight: bold;
+            margin: 0 0 25px;
+            color: #f59e0b;
+        }
+        
+        .price span {
+            font-size: 18px;
+            font-weight: normal;
+            color: #94a3b8;
+        }
+        
+        .plan-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 40px;
+        }
+        
+        .plan-card li {
+            padding: 12px 0;
+            position: relative;
+            padding-left: 35px;
+            color: #cbd5e1;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 15px;
+        }
+        
+        .plan-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #f59e0b;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .join-btn {
+            background: #f59e0b;
+            color: #1e2a3a;
+            border: none;
+            padding: 16px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 16px;
+            border: 2px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .join-btn:hover {
+            background: transparent;
+            color: #f59e0b;
+            border-color: #f59e0b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+        
+        .registration-form {
+            padding: 50px;
+            width: 60%;
+        }
+        
+        .registration-form h2 {
+            color: #f59e0b;
+            margin-bottom: 35px;
+            text-align: center;
+            font-size: 32px;
+            position: relative;
+        }
+        
+        .registration-form h2::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #f59e0b;
+            border-radius: 3px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: bold;
+            color: #f59e0b;
+            font-size: 15px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 16px;
+            color: #e2e8f0;
+            transition: all 0.3s;
+        }
+        
+        .form-group input::placeholder {
+            color: #64748b;
+        }
+        
+        .form-group input:focus {
+            border-color: #f59e0b;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+        }
+        
+        .submit-btn {
+            background: #f59e0b;
+            color: #1e2a3a;
+            border: none;
+            padding: 18px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 20px;
+            border: 2px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            background: transparent;
+            color: #f59e0b;
+            border-color: #f59e0b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+        
+        .success-message {
+            color: #4CAF50;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            padding: 15px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+        
+        .error-message {
+            color: #f44336;
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            padding: 15px;
+            background: rgba(244, 67, 54, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .plan-card, .registration-form {
+                width: 100%;
+            }
+            
+            .plan-card {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 30px;
+            }
+            
+            .registration-form {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="plan-card">
+            <h3>Elite</h3>
+            <div class="price">5000/= <span>/month</span></div>
+            <ul>
+                <li>All Premium benefits</li>
+                <li>Unlimited personal training</li>
+                <li>24/7 VIP access</li>
+                <li>Nutrition consultation</li>
+                <li>Massage therapy discounts</li>
+                <li>Priority class booking</li>
+                <li>Exclusive member events</li>
+                <li>Complimentary towel service</li>
+            </ul>
+        </div>
+        
+        <div class="registration-form">
+            <h2>Register for Elite Membership</h2>
+            <form action="elite_membership.php" method="POST">
+                <div class="form-group">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Enter your last name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">Become an Elite Member</button>
+                
+            </form>
+        </div>
+    </div>
+</body>
+</html>
